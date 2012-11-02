@@ -1,0 +1,19 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  username: tothda
+  password: 
+  pool: 5
+
+development:
+  <<: *common
+  database: coachme_development
+
+test:
+  <<: *common
+  database: coachme_test
+
+production:
+  <<: *common
+  database: coachme_production
+
