@@ -1,25 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Title:</b>
+  <%= @training.title %>
+  <br>
   <b>Started at:</b>
   <%= @training.started_at %>
 </p>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Exercise name</th>
       <th>Distance</th>
       <th>Time</th> 
+      <th>Actions</th>
     </tr>
   </thead>
-  <% for exercise in @training.exercises %>
-    <tr>
-      <td><%= exercise.name%></td>
-      <td><%= exercise.distance%></td>
-      <td><%= exercise.time%></td>
-    </tr>
-  <% end %>
+  <tbody>
+    <% @training.exercises.each do |exercise| %>
+      <tr>
+        <td><%= exercise.id %></td>
+        <td><%= exercise.name %></td>
+        <td><%= exercise.distance %></td>
+        <td><%= exercise.time %></td>
+        <td>
+          <!-- <%= link_to 'Edit', edit_training_path(@training), :class => 'btn btn-mini' %> -->
+          <%= link_to 'Destroy', training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <h2>Add an excercise:</h2>

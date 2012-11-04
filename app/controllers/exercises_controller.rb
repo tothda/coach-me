@@ -65,11 +65,12 @@ class ExercisesController < ApplicationController
   # DELETE /exercises/1
   # DELETE /exercises/1.json
   def destroy
+    @training = Training.find(params[:training_id])
     @exercise = Exercise.find(params[:id])
     @exercise.destroy
 
     respond_to do |format|
-      format.html { redirect_to exercises_url }
+      format.html { redirect_to training_url(@training) }
       format.json { head :no_content }
     end
   end

@@ -1,23 +1,26 @@
-<h1>Listing trainings</h1>
-
-<table>
-  <tr>
-    <th>Started at</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @trainings.each do |training| %>
-  <tr>
-    <td><%= training.started_at %></td>
-    <td><%= link_to 'Show', training %></td>
-    <td><%= link_to 'Edit', edit_training_path(training) %></td>
-    <td><%= link_to 'Destroy', training, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<h1>Trainings</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Started at</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trainings.each do |training| %>
+      <tr>
+        <td><%= training.id %></td>
+        <td><%= link_to training.title, training_path(training) %></td>
+        <td><%= training.started_at %></td>
+        <td>
+          <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
+          <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Training', new_training_path %>
+<%= link_to 'New', new_training_path, :class => 'btn btn-primary' %>
