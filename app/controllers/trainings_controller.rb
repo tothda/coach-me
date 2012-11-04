@@ -1,8 +1,13 @@
 class TrainingsController < ApplicationController
+  
   # GET /trainings
   # GET /trainings.json
   def index
-    @trainings = Training.all
+    @trainings = if current_user
+      current_user.trainings.all
+    else 
+      []
+    end
 
     respond_to do |format|
       format.html # index.html.erb

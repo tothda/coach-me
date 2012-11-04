@@ -26,19 +26,23 @@
             <li><%= link_to "Trainings", root_path %></li>
             <li><%= link_to "Add New", new_training_path %></li>
           </ul>
+          
+          <ul class="nav pull-right">
+            <% if user_signed_in? %>
+            		<li>
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                </li>
+            	</ul>
+            <% else %>
+              	<li><%= link_to "Sign up", new_user_registration_path %></li>
+                <li class="divider-vertical"></li>
+                <li><%= link_to "Login", new_user_session_path %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-  
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path %> |
-    <%= link_to "Login", new_user_session_path %>
-  <% end %>
 
   <div class="container">
     <div class="row">
