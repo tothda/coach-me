@@ -1,5 +1,7 @@
 CoachMe::Application.routes.draw do
 
+  devise_for :users
+
   resources :trainings do
     resources :exercises
   end
