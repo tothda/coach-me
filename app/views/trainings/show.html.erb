@@ -1,10 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Title:</b>
-  <%= @training.title %>
-  <br>
-  <b>Started at:</b>
+  <h2><%= @training.title %></h2>
   <%= @training.started_at %>
 </p>
 
@@ -20,7 +17,6 @@
   <tbody>
     <% @training.exercises.each do |exercise| %>
       <tr>
-        <td><%= exercise.id %></td>
         <td><%= exercise.name %></td>
         <td><%= exercise.distance %></td>
         <td><%= exercise.time %></td>
@@ -30,27 +26,25 @@
         </td>
       </tr>
     <% end %>
+    
+    <tr>
+      <%= form_for([@training, @training.exercises.build]) do |f| %>
+        <td>
+          <%= f.text_field :name %>
+        </td>
+        <td>
+          <%= f.text_field :distance %>
+        </td>
+        <td>
+          <%= f.text_field :time %>
+        </td>
+        <td>
+          <%= f.submit 'Add', :class => 'btn btn-mini btn-success' %>
+        </td>
+      <% end %>
+    <tr/>
   </tbody>
 </table>
-
-<h2>Add an excercise:</h2>
-<%= form_for([@training, @training.exercises.build]) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :distance %><br />
-    <%= f.text_field :distance %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br />
-    <%= f.text_field :time %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
 
 <%= link_to 'Edit', edit_training_path(@training) %> |
 <%= link_to 'Back', trainings_path %>
