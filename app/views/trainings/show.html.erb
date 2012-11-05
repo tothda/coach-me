@@ -37,8 +37,8 @@
         </td>
         <td>
           <%= f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 45px'}) %> h
-          <%= f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> min
-          <%= f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> sec
+          <%= f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> m
+          <%= f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> s
         </td>
         <td>
           <%= f.submit 'Add', :class => 'btn btn-mini btn-success' %>

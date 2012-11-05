@@ -7,7 +7,11 @@ class Exercise < ActiveRecord::Base
   after_initialize :update_hours_minutes_seconds
 
   def update_time
-    self.time = hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
+    s = hours.to_i * 3600 + minutes.to_i * 60 + seconds.to_i
+    
+    # In case of 0 second, we suppose the exercise was or will not
+    # be measured.
+    self.time = s == 0 ? nil : s
   end
   
   def update_hours_minutes_seconds
