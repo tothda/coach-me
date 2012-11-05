@@ -2,7 +2,7 @@
 
 <p>
   <h2><%= @training.title %></h2>
-  <%= @training.started_at %>
+  <%= l @training.started_at, :format => :day %>
 </p>
 
 <table class="table table-striped">
