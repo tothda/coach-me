@@ -1,9 +1,43 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <h2><%= @training.title %></h2>
-  <%= l @training.started_at, :format => :day %>
-</p>
+
+<h2><%= @training.title %></h2><br/>
+
+<div class="row">
+  <div class="span4">
+    <table class="table">
+      <tr>
+        <th>Date</th>
+        <td><%= l @training.started_at, :format => :day %></td>
+      </tr>
+      <tr>
+        <th>Feeling</th>
+        <td><%= @training.feeling %></td>
+      </tr>
+      <tr>
+        <th>Temperature</th>
+        <td><%= @training.temperature %></td>
+      </tr>
+      <tr>
+        <th>Weather</th>
+        <td><%= @training.weather %></td>
+      </tr>
+      <tr>
+        <th>Surface</th>
+        <td><%= @training.surface %></td>
+      </tr>
+    </table>    
+  </div>
+  
+  <div class="span8">
+    <h4>Notes</h4><br/>
+    <div class="well">
+      <%= @training.notes %>
+    </div>
+  </div>
+</div>
+
+
 
 <table class="table table-striped">
   <thead>

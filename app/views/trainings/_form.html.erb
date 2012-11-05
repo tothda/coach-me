@@ -13,25 +13,68 @@
   
   <fieldset>
     <legend><%= controller.action_name.capitalize %> Training</legend>
+    
+    <div class="row">
+      <div class="control-group span7">
+        <%= f.label :title, 'What did you do?', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :title, :class => 'text_field span7', :placeholder => 'Short description of the activity' %>
+        </div>
+      </div>
 
-    <div class="control-group">
-      <%= f.label :title, 'What did you do?', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :title, :class => 'text_field' %>
+      <div class="control-group span2 pull-right">
+        <%= f.label :started_at, 'When did it happen?', :class => 'control-label' %>
+        <div class="controls">
+          <div class="input-append">
+            <%= f.text_field :started_at, :value => l(@training.started_at || Time.now, :format => :day), :class => 'datepicker input-small' %>
+            <span class="add-on"><i class="icon-calendar"></i></span>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="control-group">
-      <%= f.label :started_at, 'When did it happen?', :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :started_at, :value => l(@training.started_at || Time.now, :format => :day), :class => 'datepicker' %>
+    
+    <div class="row">
+      <div class="span3">
+        <div class="control-group">
+          <%= f.label :feeling, 'Feeling', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :feeling, [["Awesome", "awesome"],["Good", "good"],["So-so", "soso"],["Sluggish", "sluggish"],["Injured", "injured"]], {:include_blank => '-- choose one --'} %>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <%= f.label :temperature, 'Temperature', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :temperature, [["Hot", "hot"],["Warm", "warm"],["Mild", "mild"],["Cold", "cold"],["Freezing", "freezing"]], {:include_blank => '-- choose one --'} %>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <%= f.label :weather, 'Weather', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :weather, [["Rainy", "rainy"],["Cloudy", "cloudy"],["Sunny", "sunny"],["Snowy", "snowy"]], {:include_blank => '-- choose one --'} %>
+          </div>
+        </div>
+    
+        <div class="control-group">
+          <%= f.label :surface, 'Surface', :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :surface, [["Road", "road"],["Trial", "trial"],["Offroad", "offroad"],["Mixed", "mixed"],["Beach", "beach"]], {:include_blank => '-- choose one --'} %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="control-group span9">
+        <%= f.label :notes, 'Notes', :class => 'control-label' %>
+        <div class="controls">
+          <%= f.text_area :notes, :class => 'span6', :rows => 12 %>
+        </div>
       </div>
     </div>
-
+    
     <div class="form-actions">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to 'Cancel', trainings_path, :class => 'btn' %>
     </div>
   </fieldset>
-  
 <% end %>
