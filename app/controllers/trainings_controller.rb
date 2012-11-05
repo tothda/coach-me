@@ -4,7 +4,7 @@ class TrainingsController < ApplicationController
   # GET /trainings.json
   def index
     @trainings = if current_user
-      current_user.trainings.all
+      current_user.trainings.order("started_at DESC").all
     else 
       []
     end
