@@ -19,7 +19,7 @@
       <tr>
         <td><%= exercise.name %></td>
         <td><%= exercise.distance %></td>
-        <td><%= exercise.time %></td>
+        <td><%= exercise.formatted_time %></td>
         <td>
           <!-- <%= link_to 'Edit', edit_training_path(@training), :class => 'btn btn-mini' %> -->
           <%= link_to 'Destroy', training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
@@ -36,7 +36,9 @@
           <%= f.text_field :distance %>
         </td>
         <td>
-          <%= f.text_field :time %>
+          <%= f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 45px'}) %> h
+          <%= f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> min
+          <%= f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> sec
         </td>
         <td>
           <%= f.submit 'Add', :class => 'btn btn-mini btn-success' %>
