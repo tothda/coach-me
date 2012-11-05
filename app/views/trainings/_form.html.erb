@@ -15,16 +15,16 @@
     <legend><%= controller.action_name.capitalize %> Training</legend>
 
     <div class="control-group">
-      <%= f.label :title, :class => 'control-label' %>
+      <%= f.label :title, 'What did you do?', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :title, :class => 'text_field' %>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :started_at, :class => 'control-label' %>
+      <%= f.label :started_at, 'When did it happen?', :class => 'control-label' %>
       <div class="controls">
-        <%= f.date_select :started_at %>
+        <%= f.text_field :started_at, :value => l(@training.started_at || Time.now, :format => :day), :class => 'datepicker' %>
       </div>
     </div>
 

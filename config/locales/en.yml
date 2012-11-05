@@ -5,4 +5,4 @@ en:
   hello: "Hello world"
   time:
     formats:
-      day: "%Y. %B %-d."
+      day: "%Y.%m.%d"

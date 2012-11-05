@@ -13,7 +13,7 @@
       <tr>
         <td><%= training.id %></td>
         <td><%= link_to training.title, training_path(training) %></td>
-        <td><%= l training.started_at, :format => :day %></td>
+        <td><%= training.started_at && l(training.started_at, :format => :day) %></td>
         <td>
           <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
