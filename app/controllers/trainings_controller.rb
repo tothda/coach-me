@@ -4,11 +4,15 @@ class TrainingsController < ApplicationController
   # GET /trainings
   # GET /trainings.json
   def index
-    @trainings = if current_user
-      current_user.trainings.order("started_at DESC").all
-    else 
-      []
+    user_id = params[:user_id] 
+    
+    user = if user_id
+      User.find(user_id)
+    else
+      current_user
     end
+    
+    @trainings = user.trainings.order("started_at DESC").all
 
     respond_to do |format|
       format.html # index.html.erb
