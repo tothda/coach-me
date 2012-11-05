@@ -1,4 +1,5 @@
 class TrainingsController < ApplicationController
+  load_and_authorize_resource
   
   # GET /trainings
   # GET /trainings.json
