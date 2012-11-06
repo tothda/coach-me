@@ -6,3 +6,4 @@ en:
   time:
     formats:
       day: "%Y.%m.%d"
+      month_and_day: "%b %e."
