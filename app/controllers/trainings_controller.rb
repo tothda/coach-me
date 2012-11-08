@@ -13,6 +13,7 @@ class TrainingsController < ApplicationController
     end
     
     @trainings = user.trainings.order("started_at DESC").all
+    @trainings_by_day = @trainings.group_by {|t| t.started_at.to_date }
 
     respond_to do |format|
       format.html # index.html.erb

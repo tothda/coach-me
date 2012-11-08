@@ -1,5 +1,5 @@
-<h1>Trainings</h1>
-<table class="table table-striped">
+<h1>Trainings</h1><br/>
+<!-- <table class="table table-striped">
   <thead>
     <tr>
       <th>Day</th>
@@ -23,4 +23,45 @@
   </tbody>
 </table>
 
-<%= link_to 'New', new_training_path, :class => 'btn btn-primary' %>
+<%= link_to 'New', new_training_path, :class => 'btn btn-primary' %> -->
+
+<% (0..3).each do |week| %>
+
+  <%
+  date = Date.today - week.week
+  first = date.beginning_of_week
+  last = date.end_of_week
+  %>
+
+  <h4><%=  "#{l(first, :format => :month_and_day)} - #{l(last, :format => :month_and_day)}"%></h4>
+  <table class="table">
+    <tbody>
+    <% trainings_in_week = [] %>
+    <% (first..last).to_a.reverse.each do |day| %>
+      <% trainings = @trainings_by_day[day] || [] %>
+      <% trainings_in_week += trainings %>
+      
+      <% for training in trainings %>
+        <tr>
+          <td class="span2"><%= "#{day.strftime("%A")}" %></td>
+          <td class="span4"><%= link_to training.title, training_path(training) %></td>
+          <td class="span2"><%= "#{training.total_distance} km" %></td>
+          <td class="span2">
+            <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
+            <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+      
+    <% end %>
+    
+    <tr>
+      <th></th>
+      <th style="text-align:right">Total</th>
+      <th><%= "%5.2f km" % trainings_in_week.map(&:total_distance).sum %></th>
+      <th></th>
+    </tr>
+  </tbody>
+  </table>
+
+<% end %>

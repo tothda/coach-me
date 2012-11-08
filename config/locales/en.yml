@@ -7,3 +7,6 @@ en:
     formats:
       day: "%Y.%m.%d"
       month_and_day: "%b %e."
+  date:
+    formats:
+      month_and_day: "%b %e."
