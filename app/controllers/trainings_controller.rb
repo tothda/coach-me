@@ -12,7 +12,7 @@ class TrainingsController < ApplicationController
       current_user
     end
 
-    trainings = Training.where("started_at > ?", Date.today - 1.year)
+    trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, user.id)
     @training_groups = group_trainings_for_index_page(trainings, Date.today)
     
     respond_to do |format|
