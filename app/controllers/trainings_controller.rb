@@ -1,6 +1,6 @@
 class TrainingsController < ApplicationController
   load_and_authorize_resource
-  
+  include TrainingsHelper
   # GET /trainings
   # GET /trainings.json
   def index
@@ -11,10 +11,10 @@ class TrainingsController < ApplicationController
     else
       current_user
     end
-    
-    @trainings = user.trainings.order("started_at DESC").all
-    @trainings_by_day = @trainings.group_by {|t| t.started_at.to_date }
 
+    trainings = Training.where("started_at > ?", Date.today - 1.year)
+    @training_groups = group_trainings_for_index_page(trainings)
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @trainings }

@@ -1,67 +1,49 @@
 <h1>Trainings</h1><br/>
-<!-- <table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Day</th>
-      <th>Title</th>
-      <th>Distance</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @trainings.each do |training| %>
+
+<% for group in @training_groups %>
+
+  <h4>
+    <%= "#{group.week.strftime('Weeek #%W')}"%>
+    <span style="color:gray; font-size: 12px; font-weight:
+                 normal">
+      <%= "(#{l(group.week, :format => :month_and_day)} -
+           #{l(group.week.end_of_week, :format => :month_and_day)})"  %>
+    </span>
+
+  </h4>
+
+  <% if group.trainings.empty? %>
+    <table class='table'>
       <tr>
-        <td><%= training.started_at && l(training.started_at, :format => :month_and_day) %></td>
-        <td><%= link_to training.title, training_path(training) %></td>
-        <td><%= "#{training.total_distance} km" %></td>
-        <td>
-          <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
-          <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
-        </td>
+        <td>No stored trainings in this week</td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </table>
+  <% end %>
 
-<%= link_to 'New', new_training_path, :class => 'btn btn-primary' %> -->
 
-<% (0..3).each do |week| %>
-
-  <%
-  date = Date.today - week.week
-  first = date.beginning_of_week
-  last = date.end_of_week
-  %>
-
-  <h4><%=  "#{l(first, :format => :month_and_day)} - #{l(last, :format => :month_and_day)}"%></h4>
-  <table class="table">
-    <tbody>
-    <% trainings_in_week = [] %>
-    <% (first..last).to_a.reverse.each do |day| %>
-      <% trainings = @trainings_by_day[day] || [] %>
-      <% trainings_in_week += trainings %>
+  <% unless group.trainings.empty? %>
+    <table class="table">
+      <tbody>
+        <% for training in group.trainings %>
+          <tr>
+            <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
+            <td class="span4"><%= link_to training.title, training_path(training) %></td>
+            <td class="span2"><%= "#{training.total_distance} km" %></td>
+            <td class="span2">
+              <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
+              <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
       
-      <% for training in trainings %>
-        <tr>
-          <td class="span2"><%= "#{day.strftime("%A")}" %></td>
-          <td class="span4"><%= link_to training.title, training_path(training) %></td>
-          <td class="span2"><%= "#{training.total_distance} km" %></td>
-          <td class="span2">
-            <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
-            <%= link_to 'Destroy', training_path(training), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
-          </td>
-        </tr>
-      <% end %>
-      
-    <% end %>
+        <% end %>
     
-    <tr>
-      <th></th>
-      <th style="text-align:right">Total</th>
-      <th><%= "%5.2f km" % trainings_in_week.map(&:total_distance).sum %></th>
-      <th></th>
-    </tr>
-  </tbody>
-  </table>
-
+      <tr>
+        <th></th>
+        <th style="text-align:right">Total</th>
+        <th><%= "%5.2f km" % group.trainings.map(&:total_distance).sum %></th>
+        <th></th>
+      </tr>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
