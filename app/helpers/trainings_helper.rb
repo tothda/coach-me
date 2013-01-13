@@ -1,31 +1,35 @@
 module TrainingsHelper
 
-  def group_trainings_for_index_page(trainings)
+  def group_trainings_for_index_page(trainings, today)
     groups = []
     tc = trainings.count
-    st = trainings.sort_by {|t| t.started_at} # sorted trainings
-    oldest = st.first.started_at
-    newest = st.last.started_at
+    st = trainings.sort_by {|t| t.started_at}.reverse # sorted trainings
+    oldest = st.last.started_at
+    newest = st.first.started_at
 
-    # weeks represented by their first day
-    week = oldest.beginning_of_week
+    # weeks represented by their end
+    week = newest.end_of_week
     ptr = 0 # pointing the next trainings to be grouped
     
-    while week < newest do
-      next_week = week + 1.week
+    while oldest < week do
+      prev_week = week - 1.week
       w = OpenStruct.new
       w.week = week.dup
       w.trainings = []
       groups << w
 
-      while ptr < tc && week <= st[ptr].started_at && st[ptr].started_at < next_week do
+      while ptr < tc && prev_week < st[ptr].started_at && st[ptr].started_at <= week do
         w.trainings << st[ptr]
         ptr += 1
       end
+
+      w.future = week.beginning_of_week > today
+      w.past = week.end_of_week < today
+      w.current = week.beginning_of_week <= today && week.end_of_week >= today
       
-      week = week + 1.week
+      week = week - 1.week
     end
-    
-    groups.reverse
+
+    groups
   end
 end

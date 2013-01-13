@@ -2,6 +2,7 @@
 
 <% for group in @training_groups %>
 
+  <div class="training-week" style="<%= 'background-color: lightyellow' if group.current %>">
   <h4>
     <%= "#{group.week.strftime('Weeek #%W')}"%>
     <span style="color:gray; font-size: 12px; font-weight:
@@ -22,6 +23,7 @@
 
 
   <% unless group.trainings.empty? %>
+    
     <table class="table">
       <tbody>
         <% for training in group.trainings %>
@@ -46,4 +48,6 @@
       </tbody>
     </table>
   <% end %>
+
+  </div>
 <% end %>

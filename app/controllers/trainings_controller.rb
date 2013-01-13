@@ -13,7 +13,7 @@ class TrainingsController < ApplicationController
     end
 
     trainings = Training.where("started_at > ?", Date.today - 1.year)
-    @training_groups = group_trainings_for_index_page(trainings)
+    @training_groups = group_trainings_for_index_page(trainings, Date.today)
     
     respond_to do |format|
       format.html # index.html.erb
