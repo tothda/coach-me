@@ -27,7 +27,12 @@
     <table class="table">
       <tbody>
         <% for training in group.trainings %>
-          <tr>
+          <tr rel="popover" 
+              data-trigger="hover"
+              data-placement="bottom"
+              data-delay="300"
+              data-title="<%= 'Notes' if training.notes.present? %>"
+              data-content="<%= training.notes %>">
             <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
             <td class="span4"><%= link_to training.title, training_path(training) %></td>
             <td class="span2"><%= "#{training.total_distance} km" %></td>
