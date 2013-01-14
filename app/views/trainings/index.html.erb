@@ -34,7 +34,12 @@
               data-title="<%= 'Notes' if training.notes.present? %>"
               data-content="<%= training.notes %>">
             <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
-            <td class="span4"><%= link_to training.title, training_path(training) %></td>
+            <td class="span4">
+              <%= link_to training.title, training_path(training) %>
+              <% if training.notes.present? %>
+                <i class="icon-comment"></i>
+              <% end %>
+            </td>
             <td class="span2"><%= "#{training.total_distance} km" %></td>
             <td class="span2">
               <%= link_to 'Edit', edit_training_path(training), :class => 'btn btn-mini' %>
