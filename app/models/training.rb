@@ -1,5 +1,5 @@
 class Training < ActiveRecord::Base
-  has_many :exercises
+  has_many :exercises, :order => "id ASC"
   belongs_to :user
   attr_accessible :started_at, :title, :feeling, :temperature, :weather, :surface, :notes
   
