@@ -53,14 +53,10 @@ class ExercisesController < ApplicationController
   def update
     @exercise = Exercise.find(params[:id])
 
-    respond_to do |format|
-      if @exercise.update_attributes(params[:exercise])
-        format.html { redirect_to @exercise, notice: 'Exercise was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @exercise.errors, status: :unprocessable_entity }
-      end
+    if @exercise.update_attributes(params[:exercise])
+      render text: "", status: 200
+    else
+      render text: "", status: 500
     end
   end
 

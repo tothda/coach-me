@@ -1,6 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-
 <h2><%= @training.title %></h2><br/>
 
 <div class="row">
@@ -39,48 +38,55 @@
 
 
 
-<table class="table table-striped">
+<table class="table table-striped exercise-table"
+       data-training-id="<%= @training.id %>">
   <thead>
     <tr>
-      <th>Exercise name</th>
-      <th>Distance</th>
-      <th>Time</th> 
-      <th>Actions</th>
+      <th width="30%">Exercise name</th>
+      <th width="30%">Distance</th>
+      <th width="30%">Time</th> 
+      <th width="3%"></th>
     </tr>
   </thead>
   <tbody>
     <% @training.exercises.each do |exercise| %>
-      <tr>
-        <td><%= exercise.name %></td>
-        <td><%= exercise.distance %></td>
-        <td><%= exercise.formatted_time %></td>
+      <tr data-exercise-id="<%= exercise.id %>">
+        <td class="exercise-name"><%= exercise.name %></td>
+        <td class="exercise-distance"><%= exercise.distance %></td>
+        <td class="exercise-time"><%= exercise.formatted_time %></td>
         <td>
-          <!-- <%= link_to 'Edit', edit_training_path(@training), :class => 'btn btn-mini' %> -->
-          <%= link_to 'Destroy', training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini btn-danger' %>
+          <%= link_to training_exercise_path(@training, exercise),
+          :method => :delete, :confirm => 'Are you sure?', :class =>
+          'btn btn-mini' do %>
+            <i class="icon-trash"></i>
+          <% end %>
         </td>
       </tr>
     <% end %>
-    
-    <tr>
-      <%= form_for([@training, @training.exercises.build]) do |f| %>
-        <td>
-          <%= f.text_field :name %>
-        </td>
-        <td>
-          <%= f.text_field :distance %>
-        </td>
-        <td>
-          <%= f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 45px'}) %> h
-          <%= f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> m
-          <%= f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> s
-        </td>
-        <td>
-          <%= f.submit 'Add', :class => 'btn btn-mini btn-success' %>
-        </td>
-      <% end %>
-    <tr/>
   </tbody>
+</table>
+
+<table class="table">
+  <tr class="exercise-form-row">
+    <%= form_for([@training, @training.exercises.build]) do |f| %>
+      <td width="30%">
+        <%= f.text_field :name %>
+      </td>
+      <td width="30%">
+        <%= f.text_field :distance %>
+      </td>
+      <td width="30%">
+        <%= f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 45px'}) %> h
+        <%= f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> m
+        <%= f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'}) %> s
+      </td>
+      <td width="10%">
+        <%= f.submit 'Add', :class => 'btn btn-mini btn-success' %>
+      </td>
+    <% end %>
+  <tr/>
 </table>
 
 <%= link_to 'Edit', edit_training_path(@training) %> |
 <%= link_to 'Back', trainings_path %>
+

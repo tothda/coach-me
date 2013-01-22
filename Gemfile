@@ -20,6 +20,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'twitter-bootstrap-rails', '~> 2.2.0'
   gem 'bootstrap-datepicker-rails'
+  gem 'underscore-rails'
 end
 
 gem 'jquery-rails'

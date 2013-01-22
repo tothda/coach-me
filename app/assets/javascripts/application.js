@@ -16,6 +16,7 @@
 //= require_tree .
 
 //= require bootstrap-datepicker/core
+//= require underscore
 
 $(window).ready(function(){
   $('.datepicker').datepicker({"format": "yyyy.mm.dd", "weekStart": 1, "autoclose": true});
