@@ -36,7 +36,7 @@
             <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
             <td class="span4">
               <%= link_to training.title, training_path(training) %>
-              <% if training.notes.present? %>1
+              <% if training.notes.present? %>
                 <i class="icon-comment"></i>
               <% end %>
             </td>
