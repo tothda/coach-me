@@ -2,8 +2,13 @@
 
 <% for group in @training_groups %>
 
-  <div class="training-week" style="<%= 'background-color: lightyellow' if group.current %>">
-  <h4>
+  <div class="training-week" style="margin-bottom: 20px; <%= 'background-color:
+                                    lightyellow; border: 1px dashed
+                                    gray' if group.current %>">
+  <% if group.current %>
+    <h3 style="padding: 10px 0 0 10px; text-decoration: underline">Current week</h3>
+  <% end %>
+  <h4 style="padding: 10px">
     <%= "#{group.week.strftime('Weeek #%W')}"%>
     <span style="color:gray; font-size: 12px; font-weight:
                  normal">
@@ -24,7 +29,7 @@
 
   <% unless group.trainings.empty? %>
     
-    <table class="table">
+    <table class="table" sytle="mrgin-bottom: 0">
       <tbody>
         <% for training in group.trainings %>
           <% if training.needs_summary? %>
@@ -41,7 +46,7 @@
           <% end %>
             <td class="span2">
               <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
-                <%= " #{training.started_at.strftime("%d")}" %>
+                <%= " #{training.started_at.strftime("%b %d")}" %>
               </span>
               <%= "#{training.started_at.strftime("%A")}" %>
             </td>
