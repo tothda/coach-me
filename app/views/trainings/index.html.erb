@@ -27,16 +27,22 @@
     <table class="table">
       <tbody>
         <% for training in group.trainings %>
-          <tr rel="popover" 
-              data-trigger="hover"
-              data-placement="bottom"
-              data-delay="300"
-              data-title="<%= 'Notes' if training.notes.present? %>"
-              data-content="<%= training.notes %>">
+          <% if training.needs_summary? %>
+            <tr rel="popover" 
+                data-trigger="hover"
+                data-placement="bottom"
+                data-delay="300"
+                data-title="Summary"
+                data-content="<%= 
+                            render(:partial => 'training_summary',
+                                   :locals => {:training => training})%>">
+          <% else %>
+            <tr>
+          <% end %>
             <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
             <td class="span4">
               <%= link_to training.title, training_path(training) %>
-              <% if training.notes.present? %>
+              <% if training.needs_summary? %>
                 <i class="icon-comment"></i>
               <% end %>
             </td>

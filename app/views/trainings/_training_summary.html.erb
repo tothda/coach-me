@@ -1,0 +1,14 @@
+<% if training.notes.present? %>
+  <p><%= training.notes %></p>
+  <br/>
+<% end %>
+
+<table style='width: 100%'>
+  <% training.exercises.each do |exercise| %>
+    <tr data-exercise-id='<%= exercise.id %>'>
+      <td class='exercise-name'><%= exercise.name %></td>
+      <td class='exercise-distance'><%= "#{exercise.distance} km" %></td>
+      <td class='exercise-time'><%= exercise.formatted_time %></td>
+    </tr>
+  <% end %>
+</table>

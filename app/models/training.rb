@@ -6,4 +6,9 @@ class Training < ActiveRecord::Base
   def total_distance
     exercises.map(&:distance).map(&:to_f).sum
   end
+
+  # if it has notes or at least one exercise
+  def needs_summary?
+    notes.present? || exercises.present?
+  end
 end
