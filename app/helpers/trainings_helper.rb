@@ -2,6 +2,7 @@ module TrainingsHelper
 
   def group_trainings_for_index_page(trainings, today)
     groups = []
+    return groups if trainings.blank?
     tc = trainings.count
     st = trainings.sort_by {|t| t.started_at}.reverse # sorted trainings
     oldest = st.last.started_at
