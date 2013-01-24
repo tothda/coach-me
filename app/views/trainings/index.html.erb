@@ -39,7 +39,12 @@
           <% else %>
             <tr>
           <% end %>
-            <td class="span2"><%= "#{training.started_at.strftime("%A")}" %></td>
+            <td class="span2">
+              <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
+                <%= " #{training.started_at.strftime("%d")}" %>
+              </span>
+              <%= "#{training.started_at.strftime("%A")}" %>
+            </td>
             <td class="span4">
               <%= link_to training.title, training_path(training) %>
               <% if training.needs_summary? %>
