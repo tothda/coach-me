@@ -7,7 +7,7 @@
     <%= "#{group.week.strftime('Weeek #%W')}"%>
     <span style="color:gray; font-size: 12px; font-weight:
                  normal">
-      <%= "(#{l(group.week, :format => :month_and_day)} -
+      <%= "(#{l(group.week.beginning_of_week, :format => :month_and_day)} -
            #{l(group.week.end_of_week, :format => :month_and_day)})"  %>
     </span>
 
