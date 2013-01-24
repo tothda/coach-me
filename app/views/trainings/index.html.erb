@@ -1,6 +1,8 @@
 <h1>Trainings</h1><br/>
 
-<% for group in @training_groups %>
+<%= render :partial => 'future_summary' %>
+
+<% for group in @training_groups.reject {|x| x.future } %>
 
   <div class="training-week" style="margin-bottom: 20px; <%= 'background-color:
                                     lightyellow; border: 1px dashed

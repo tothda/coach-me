@@ -1,0 +1,22 @@
+%table{:class=>'table future-summary-table'}
+  - @training_groups.take_while {|w| w.future || w.current}.each_with_index do |week, idx|
+    %tr
+      - monday = week.week.beginning_of_week
+      - for day in ((0..6).map {|n| monday + n.days})
+        %td.calendar-day{:class => ("today" if day == Date.today)}
+          %div.clearfix
+            - if day == Date.today
+              %span.name-of-day
+                Today
+            - elsif idx == 0
+              %span.name-of-day
+                = day.strftime('%A')
+            %span.day-of-month
+              = day.strftime('%d')
+          - trainings_on_this_day = week.by_day[day.to_date] || []
+          - trainings_on_this_day.each_with_index do |training, idx2|
+            = link_to training.title, training_path(training)
+            - if idx2 < trainings_on_this_day.count - 1
+              %hr
+            
+    

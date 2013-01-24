@@ -17,10 +17,13 @@ module TrainingsHelper
       w = OpenStruct.new
       w.week = week.dup
       w.trainings = []
+      w.by_day = {}
       groups << w
 
       while ptr < tc && prev_week < st[ptr].started_at && st[ptr].started_at <= week do
-        w.trainings << st[ptr]
+        t = st[ptr]
+        w.trainings << t
+        (w.by_day[t.started_at.to_date] ||= []) << t
         ptr += 1
       end
 

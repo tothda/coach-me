@@ -21,6 +21,7 @@ group :assets do
   gem 'twitter-bootstrap-rails', '2.0.7'
   gem 'bootstrap-datepicker-rails'
   gem 'underscore-rails'
+  gem 'haml-rails'
 end
 
 gem 'jquery-rails'
@@ -42,3 +43,4 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem "cancan"
+gem 'haml'
