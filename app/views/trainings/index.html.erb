@@ -34,6 +34,7 @@
     <table class="table" sytle="mrgin-bottom: 0">
       <tbody>
         <% for training in group.trainings %>
+          <% if training.started_at <= Date.today %>
           <% if training.needs_summary? %>
             <tr rel="popover" 
                 data-trigger="hover"
@@ -62,7 +63,7 @@
           </tr>
       
         <% end %>
-    
+        <% end %>
       <tr>
         <th></th>
         <th style="text-align:right">Total</th>
