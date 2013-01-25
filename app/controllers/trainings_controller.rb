@@ -1,5 +1,5 @@
 class TrainingsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:index, :show]
   include TrainingsHelper
   # GET /trainings
   # GET /trainings.json
@@ -8,10 +8,11 @@ class TrainingsController < ApplicationController
     
     if user_id && user_id != current_user.id
       @user = User.find(user_id)
-      authorize! :read_trainings, @user
     else
       @user = current_user
     end
+
+    authorize! :read_trainings, @user
 
     trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
     @training_groups = group_trainings_for_index_page(trainings, Date.today)
@@ -26,7 +27,12 @@ class TrainingsController < ApplicationController
   # GET /trainings/1.json
   def show
     @training = Training.find(params[:id])
-
+    owner = @training.user
+    
+    if owner != current_user
+      authorize! :read_trainings, owner
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @training }

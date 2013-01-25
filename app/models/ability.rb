@@ -25,24 +25,30 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     user ||= User.new
-    
+
     if user.admin?
       can :manage, :all
     end
-    
     
     can :manage, Training, :user_id => user.id
 
     can :read, User do |subject|
       user.viewer_of?(subject) ||
-      user.viewed_by?(subject) ||
-      user.trainer_of?(subject) ||
-      user.trained_by?(subject)
+        user.viewed_by?(subject) ||
+        user.trainer_of?(subject) ||
+        user.trained_by?(subject)
     end
 
     can :read_trainings, User do |subject|
+      user == subject ||
       user.viewer_of?(subject) ||
       user.trainer_of?(subject)
+    end
+
+    can :manage, Exercise do |exercise|
+      owner = exercise.training.user
+
+      user == owner || user.trainer_of?(owner)
     end
   end
 end

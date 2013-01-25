@@ -66,9 +66,13 @@
   </tbody>
 </table>
 
+<% 
+   exercise = @training.exercises.build
+   if can? :manage, exercise
+%>
 <table class="table">
   <tr class="exercise-form-row">
-    <%= form_for([@training, @training.exercises.build]) do |f| %>
+    <%= form_for([@training, exercise]) do |f| %>
       <td width="30%">
         <%= f.text_field :name %>
       </td>
@@ -87,6 +91,7 @@
   <tr/>
 </table>
 
-<%= link_to 'Edit', edit_training_path(@training) %> |
+<%= link_to 'Edit', edit_training_path(@training) %>|
+<% end %>
 <%= link_to 'Back', trainings_path %>
 
