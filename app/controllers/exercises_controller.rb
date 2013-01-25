@@ -4,7 +4,7 @@ class ExercisesController < ApplicationController
   def create
     @training = Training.find(params[:training_id])
     @exercise = @training.exercises.build(params[:exercise])
-    authorize! :create, @exercise
+    authorize! :manage_trainings, @training.user
     @exercise.save
     redirect_to training_path(@training)
   end
@@ -13,7 +13,7 @@ class ExercisesController < ApplicationController
   # PUT /exercises/1.json
   def update
     @exercise = Exercise.find(params[:id])
-    authorize! :update, @exercise
+    authorize! :manage_trainings, @exercise.training.user
     if @exercise.update_attributes(params[:exercise])
       render text: "", status: 200
     else
@@ -26,7 +26,7 @@ class ExercisesController < ApplicationController
   def destroy
     @training = Training.find(params[:training_id])
     @exercise = Exercise.find(params[:id])
-    authorize! :destroy, @exercise
+    authorize! :manage_trainings, @training.user
     @exercise.destroy
 
     respond_to do |format|

@@ -45,10 +45,8 @@ class Ability
       user.trainer_of?(subject)
     end
 
-    can :manage, Exercise do |exercise|
-      owner = exercise.training.user
-
-      user == owner || user.trainer_of?(owner)
+    can :manage_trainings, User do |subject|
+      user == subject || user.trainer_of?(subject)
     end
   end
 end
