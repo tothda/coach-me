@@ -1,9 +1,8 @@
-<%= render :partial => 'relations' %>
+<% if (completed_trainings = @training_groups.reject {|x| x.future
+   }).present? %>
 
-<h1>Trainings</h1><br/>
-
-<%= render :partial => 'future_summary' %>
-
+<h3>Completed trainings:</h3>
+<br/>
 <% for group in @training_groups.reject {|x| x.future } %>
 
   <div class="training-week" style="margin-bottom: 20px; <%= 'background-color:
@@ -76,4 +75,5 @@
   <% end %>
 
   </div>
+<% end %>
 <% end %>

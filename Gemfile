@@ -24,6 +24,10 @@ group :assets do
   gem 'haml-rails'
 end
 
+group :development do
+  gem 'debugger'
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password

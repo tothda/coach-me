@@ -34,8 +34,15 @@ class Ability
     can :manage, Training, :user_id => user.id
 
     can :read, User do |subject|
-      user.viewer_of? subject
-      user.trainer_of? subject
+      user.viewer_of?(subject) ||
+      user.viewed_by?(subject) ||
+      user.trainer_of?(subject) ||
+      user.trained_by?(subject)
+    end
+
+    can :read_trainings, User do |subject|
+      user.viewer_of?(subject) ||
+      user.trainer_of?(subject)
     end
   end
 end

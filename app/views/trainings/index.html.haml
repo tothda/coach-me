@@ -1,0 +1,20 @@
+- if @user == current_user
+  %hr
+  = render :partial => 'relations'
+  %hr
+
+- if @user == current_user
+  %h1 My Trainings
+- else
+  %h1
+    Trainings of 
+    #{link_to @user.full_name, user_path(@user)}
+%br
+
+
+%br
+= render :partial => 'future_summary'
+
+%br
+= render :partial => 'past_training_list'
+

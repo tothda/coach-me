@@ -1,0 +1,6 @@
+%h1="The profile of #{@user.full_name}"
+
+%p
+  Send an email to
+  =mail_to @user.email, @user.full_name
+  if you want.

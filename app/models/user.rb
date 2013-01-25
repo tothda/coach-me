@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
   # attr_accessible :title, :body
   
   has_many :trainings
@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
 
   has_many :viewed_athlete_associations, :class_name => 'Relationship', :foreign_key => 'object_id', :conditions => "rel = 'VIEWER_OF'"
   has_many :viewed_athletes, :through => :viewed_athlete_associations, :source => :subject
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+
   
   def admin?
     role == "ADMIN"
@@ -31,7 +34,19 @@ class User < ActiveRecord::Base
     self.trainees.include? subject
   end
 
+  def trained_by?(subject)
+    self.trainers.include? subject
+  end
+  
   def viewer_of?(subject)
     self.viewed_athletes.include? subject
+  end
+
+  def viewed_by?(subject)
+    self.viewers.include? subject
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

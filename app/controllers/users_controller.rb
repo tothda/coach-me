@@ -5,4 +5,8 @@ class UsersController < ApplicationController
     authorize! :manage, :users
     @users = User.all
   end
+
+  def show
+    
+  end
 end

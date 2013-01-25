@@ -7,13 +7,13 @@ class TrainingsController < ApplicationController
     user_id = params[:user_id] 
     
     if user_id && user_id != current_user.id
-      user = User.find(user_id)
-      authorize! :read, user
+      @user = User.find(user_id)
+      authorize! :read_trainings, @user
     else
-      user = current_user
+      @user = current_user
     end
 
-    trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, user.id)
+    trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
     @training_groups = group_trainings_for_index_page(trainings, Date.today)
     
     respond_to do |format|
