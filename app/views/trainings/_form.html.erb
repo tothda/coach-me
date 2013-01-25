@@ -39,7 +39,7 @@
         <div class="control-group">
           <%= f.label :feeling, 'Feeling', :class => 'control-label' %>
           <div class="controls">
-            <%= f.select :feeling, [["Awesome", "awesome"],["Good", "good"],["So-so", "soso"],["Sluggish", "sluggish"],["Injured", "injured"]], {:include_blank => '-- choose one --'} %>
+            <%= f.select :feeling, Training::FEELINGS, {:include_blank => '-- choose one --'} %>
           </div>
         </div>
     

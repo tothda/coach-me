@@ -48,24 +48,35 @@
           <% else %>
             <tr>
           <% end %>
-            <td class="span2">
+            <td style="width: 20%; padding-left: 20px">
               <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
                 <%= " #{training.started_at.strftime("%b %d")}" %>
               </span>
               <%= "#{training.started_at.strftime("%A")}" %>
             </td>
-            <td class="span4">
+            <td style="width: 20%">
+              <% for i in 1..training.feeling_value %>
+                <i class="icon-star" style="color: orange"></i>
+              <% end %>
+              <% for i in 1..(5-training.feeling_value) %>
+                <i class="icon-star-empty" style="color: lightgray"></i>
+              <% end %>              
+            </td>
+            <td  style="width: 50%">
               <%= link_to training.title, training_path(training) %>
               <% if training.needs_summary? %>
                 <i class="icon-comment"></i>
               <% end %>
             </td>
-            <td class="span2"><%= "#{training.total_distance} km" %></td>
+            <td></td>
+            <td  style="width: 10%"><%= "#{training.total_distance} km" %></td>
           </tr>
       
         <% end %>
         <% end %>
       <tr>
+        <th></th>
+        <th></th>
         <th></th>
         <th style="text-align:right">Total</th>
         <th><%= "%5.2f km" % group.trainings.map(&:total_distance).sum %></th>
