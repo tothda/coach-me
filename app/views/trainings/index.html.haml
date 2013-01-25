@@ -1,14 +1,25 @@
-- if @user == current_user
+- if myself? @user
   %hr
   = render :partial => 'relations'
   %hr
 
-- if @user == current_user
-  %h1 My Trainings
-- else
-  %h1
-    Trainings of 
-    #{link_to @user.full_name, user_path(@user)}
+.row
+  .span8
+    - if @user == current_user
+      %h1 My Trainings
+    - else
+      %h1
+        Trainings of 
+        #{link_to @user.full_name, user_path(@user)}
+  .span4
+    - if can? :manage_trainings, @user
+      .pull-right{style: 'padding-top: 10px'}
+        = link_to new_user_training_path(@user), {class: 'btn btn-primary'} do
+          - if myself? @user
+            Create new training for myself
+          - else
+            = "Create new training for #{@user.first_name}"
+          .i.icon-arrow-right
 %br
 
 

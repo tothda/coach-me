@@ -1,18 +1,15 @@
 class TrainingsController < ApplicationController
-  load_and_authorize_resource :except => [:index, :show]
+  skip_authorization_check
+  before_filter :initialize_athlete
+  before_filter :authorize_read, :only => [:index, :show]
+  before_filter :authorize_manage, :except => [:index, :show]
+  
   include TrainingsHelper
   # GET /trainings
   # GET /trainings.json
   def index
-    user_id = params[:user_id] 
-    
-    if user_id && user_id != current_user.id
-      @user = User.find(user_id)
-    else
-      @user = current_user
-    end
-
-    authorize! :read_trainings, @user
+    authorize! :read_trainings, @athlete
+    @user = @athlete
 
     trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
     @training_groups = group_trainings_for_index_page(trainings, Date.today)
@@ -40,7 +37,8 @@ class TrainingsController < ApplicationController
   # GET /trainings/new.json
   def new
     @training = Training.new
-
+    @training.user = @athlete
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @training }
@@ -49,6 +47,7 @@ class TrainingsController < ApplicationController
 
   # GET /trainings/1/edit
   def edit
+    authorize! :manage_trainings, @athlete
     @training = Training.find(params[:id])
   end
 
@@ -56,8 +55,8 @@ class TrainingsController < ApplicationController
   # POST /trainings.json
   def create
     @training = Training.new(params[:training])
-    @training.user = current_user
-
+    @training.user = @athlete
+    
     respond_to do |format|
       if @training.save
         format.html { redirect_to @training, notice: 'Training was successfully created.' }
@@ -95,5 +94,23 @@ class TrainingsController < ApplicationController
       format.html { redirect_to trainings_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def initialize_athlete
+    @athlete = if params[:user_id]
+                User.find(params[:user_id])
+              else
+                current_user
+              end
+  end
+
+  def authorize_manage
+    authorize! :manage_trainings, @athlete
+  end
+
+  def authorize_read
+    authorize! :read_trainings, @athlete
   end
 end

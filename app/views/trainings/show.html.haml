@@ -2,7 +2,7 @@
 
 .button-bar.clearfix
   .pull-left{ style: 'margin-right: 10px'}
-    = link_to trainings_path, :class => 'btn'  do
+    = link_to user_trainings_path(@training.user), :class => 'btn'  do
       .i.icon-arrow-left
       Back to the trainings
 
@@ -26,8 +26,14 @@
 
 
 .row
+  .span8
+    %h4 Notes
+    %br
+    .well
+      = @training.notes
+
   .span4
-    %table.table.table-striped
+    %table.table.table-bordered
       %tr
         %th Date
         %td= l @training.started_at, :format => :day
@@ -43,12 +49,6 @@
       %tr
         %th Surface
         %td= @training.surface
-
-  .span8
-    %h4 Notes
-    %br
-    .well
-      = @training.notes
 
 %table.table.table-striped.exercise-table{:'data-training-id' => @training.id}
   %thead
@@ -67,8 +67,9 @@
         %td.exercise-distance= exercise.distance
         %td.exercise-time= exercise.formatted_time
         %td
-          = link_to training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
-            %i.icon-trash
+          - if can? :manage_trainings, @training.user
+            = link_to training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+              %i.icon-trash
 
 - if can? :manage_trainings, @training.user
   %table.table
@@ -79,10 +80,13 @@
         %td{:width => '30%'}
           = f.text_field :distance
         %td{:width => '30%'}
-          = f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 45px'})
-          = f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'})
-          = f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 50px'})
-        %td{:width => '10%'}
-          = f.submit 'Add', :class => 'btn btn-mini btn-success'
+          = f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
+          = f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+          = f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+        %td{:width => '3%'}
+          = f.button :class => 'btn btn-success' do
+            .i.icon-plus
+            Add
+            
 
   
