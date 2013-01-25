@@ -27,11 +27,8 @@ class TrainingsController < ApplicationController
   # GET /trainings/1.json
   def show
     @training = Training.find(params[:id])
-    owner = @training.user
     
-    if owner != current_user
-      authorize! :read_trainings, owner
-    end
+    authorize! :read_trainings, @training.user
     
     respond_to do |format|
       format.html # show.html.erb
