@@ -1,0 +1,19 @@
+.row
+  .span6
+    - if (athletes = current_user.trainees).present?
+      %h3 My Athletes
+      - for athlete in athletes
+        = link_to athlete.email, user_trainings_path(athlete)
+    - if (coaches = current_user.trainers).present?    
+      %h3 My coaches
+      - for coach in coaches
+        = link_to coach.email, user_path(coach)
+  .span6
+    - if (following = current_user.viewed_athletes).present?
+      %h3 Athletes I'm following
+      - for athlete in following
+        = link_to athlete.email, user_trainings_path(athlete)
+    - if (followers = current_user.viewers).present?
+      %h3 My Followers
+      - for athlete in followers
+        = link_to athlete.email, user_trainings_path(athlete)

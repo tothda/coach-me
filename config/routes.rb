@@ -12,6 +12,8 @@ CoachMe::Application.routes.draw do
     resources :exercises
   end
 
+  resources :relationships
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

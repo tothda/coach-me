@@ -1,0 +1,35 @@
+%h1 Users
+%table.table.table-striped
+  %thead
+    %tr
+      %th ID
+      %th Email
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td=user.id
+        %td=link_to user.email, user_trainings_path(user)
+
+%h1 Relations
+
+%table.table
+  %tr
+    %th Object
+    %th Relation
+    %th Subject
+    %th
+  - for rel in Relationship.all
+    %tr
+      %td=rel.object.email
+      %td=rel.rel
+      %td=rel.subject.email
+      %td
+        =link_to relationship_path(rel), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+          %i.icon-trash
+
+= form_for Relationship.new do |f|
+  %strong Create new relation:
+  = f.select :object_id, User.all.collect {|p| [ p.email, p.id ] }, { :include_blank => true }
+  = f.select :rel, Relationship::CODES, { :include_blank => true }
+  = f.select :subject_id, User.all.collect {|p| [ p.email, p.id ] }, { :include_blank => true }
+  = f.submit "Create relation", :class => "btn, btn-primary"

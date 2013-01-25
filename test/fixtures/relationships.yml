@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  subject_id: 
+  object_id: 
+  relationship: MyString
+
+two:
+  subject_id: 
+  object_id: 
+  relationship: MyString

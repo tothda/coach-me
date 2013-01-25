@@ -6,10 +6,11 @@ class TrainingsController < ApplicationController
   def index
     user_id = params[:user_id] 
     
-    user = if user_id
-      User.find(user_id)
+    if user_id && user_id != current_user.id
+      user = User.find(user_id)
+      authorize! :read, user
     else
-      current_user
+      user = current_user
     end
 
     trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, user.id)

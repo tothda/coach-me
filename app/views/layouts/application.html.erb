@@ -12,38 +12,12 @@
 </head>
 <body>
   
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <a class="brand" href="#">Coach.Me</a>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <li><%= link_to "Trainings", root_path %></li>
-            <li><%= link_to "Runners", users_path %></li>
-            <li><%= link_to "Add New", new_training_path %></li>
-          </ul>
-          
-          <ul class="nav pull-right">
-            <% if user_signed_in? %>
-              <li><%= link_to current_user.email, edit_user_registration_path %></li>
-            	<li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
-            <% else %>
-              	<li><%= link_to "Sign up", new_user_registration_path %></li>
-                <li class="divider-vertical"></li>
-                <li><%= link_to "Login", new_user_session_path %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render :partial => 'layouts/menubar' %>
 
   <div class="container">
+    <div class="row">
+      <div class="span12"><%= render :partial => 'layouts/messages' %></div>
+    </div>
     <div class="row">
       <div class="span12"><%= yield %></div>
     </div>

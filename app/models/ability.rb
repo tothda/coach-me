@@ -24,8 +24,18 @@ class Ability
     #   can :update, Article, :published => true
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    if user
+    user ||= User.new
+    
+    if user.admin?
       can :manage, :all
+    end
+    
+    
+    can :manage, Training, :user_id => user.id
+
+    can :read, User do |subject|
+      user.viewer_of? subject
+      user.trainer_of? subject
     end
   end
 end
