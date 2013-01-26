@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   
   def index
     authorize! :manage, :users
-    @users = User.all
+    @users = User.order("id desc").all
   end
 
   def show
