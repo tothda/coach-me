@@ -31,4 +31,8 @@ class Training < ActiveRecord::Base
     values = self.class.const_get(field.to_s.upcase.to_sym)
     values.detect {|x| x.last == val}.first
   end
+
+  def title
+     read_attribute(:title).blank? ? "Untitled training" :  read_attribute(:title)
+  end
 end
