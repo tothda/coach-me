@@ -56,10 +56,13 @@ class TrainingsController < ApplicationController
   def create
     @training = Training.new(params[:training])
     @training.user = @athlete
+
+    @training.title = 'Untitled'
+    @training.started_at = Date.today
     
     respond_to do |format|
       if @training.save
-        format.html { redirect_to @training, notice: 'Training was successfully created.' }
+        format.html { redirect_to "#{training_path(@training)}/#/edit", notice: 'Training was successfully created.' }
         format.json { render json: @training, status: :created, location: @training }
       else
         format.html { render action: "new" }
@@ -72,7 +75,6 @@ class TrainingsController < ApplicationController
   # PUT /trainings/1.json
   def update
     @training = Training.find(params[:id])
-
     respond_to do |format|
       if @training.update_attributes(params[:training])
         format.html { redirect_to @training, notice: 'Training was successfully updated.' }

@@ -6,7 +6,12 @@ class ExercisesController < ApplicationController
     @exercise = @training.exercises.build(params[:exercise])
     authorize! :manage_trainings, @training.user
     @exercise.save
-    redirect_to training_path(@training)
+
+    respond_to do |format|
+      format.html { redirect_to training_url(@training) }
+      format.json { render :json => @exercise.to_json }
+    end
+
   end
 
   # PUT /exercises/1

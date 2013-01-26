@@ -1,64 +1,103 @@
-#notice= notice
+#training-show-page{:'data-training-id' => @training.id}
+  .button-bar.clearfix
+    .pull-left{ style: 'margin-right: 10px'}
+      = link_to user_trainings_path(@training.user), :class => 'btn'  do
+        .i.icon-arrow-left
+        Back to the trainings
 
-.button-bar.clearfix
-  .pull-left{ style: 'margin-right: 10px'}
-    = link_to user_trainings_path(@training.user), :class => 'btn'  do
-      .i.icon-arrow-left
-      Back to the trainings
+    - if can? :manage_trainings, @training.user
+      .btn-group.pull-left
+        -# = link_to edit_training_path(@training), :class => 'btn btn-info' do
+        -#   .i.icon-check
+        -#   Mark as complete
+        = link_to '#', :class => 'btn edit-button' do
+          .i.icon-edit
+          Edit
+        = link_to training_path(@training), :class => 'btn', :method => :delete, :confirm => 'Are you sure?'  do
+          .i.icon-trash
+          Delete
 
-  - if can? :manage_trainings, @training.user
-    .btn-group.pull-left
-      -# = link_to edit_training_path(@training), :class => 'btn btn-info' do
-      -#   .i.icon-check
-      -#   Mark as complete
-      = link_to edit_training_path(@training), :class => 'btn' do
-        .i.icon-edit
-        Edit
-      = link_to training_path(@training), :class => 'btn', :method => :delete, :confirm => 'Are you sure?'  do
-        .i.icon-trash
-        Delete
+  %hr
+
+  .row
+    .span8
+      .training-title
+        %h2= @training.title
+    .span4
+      .pull-right
+        %h3
+          %i.icon-calendar
+          %span.training-date
+            -if @training.started_at.present?
+              =l @training.started_at, :format => :day
+  %hr
+
+
+  .row
+    .span8
+      %h4 Notes
+      %br
+        .training-notes
+          .well
+            = @training.notes
+
+    .span4
+      %br
+      %br
+      %table.table.table-bordered.features-table
+        %tr
+          %th Feeling
+          %td.training-feeling
+            %span
+              = @training.description_of(:feeling)
+        %tr
+          %th Temperature
+          %td.training-temperature
+            %span
+              = @training.description_of(:temperature)
+        %tr
+          %th Weather
+          %td.training-weather
+            %span
+              = @training.description_of(:weather)
+        %tr
+          %th Surface
+          %td.training-surface
+            %span
+              = @training.description_of(:surface)
 
 %hr
+%h3 Add new exercise
+%br
 
-.row
-  .span8
-    %h2= @training.title
-  .span4  
-    %h3.pull-right
-      %i.icon-calendar
-      =l @training.started_at, :format => :day
+- if can? :manage_trainings, @training.user
+  %table{:width => '100%'}
+    %tr.exercise-form-row
+      %td{:width => '30%'}
+        = text_field "exercise", "name", placeholder: 'Exercise description'
+      %td{:width => '30%'}
+        = text_field "exercise", "distance", placeholder: 'Distance covered'
+      %td{:width => '30%'}
+        Time:
+        = select("exercise", "hours", (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
+        h
+        = select("exercise", "minutes", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+        m
+        = select("exercise", "seconds", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+        s
+      %td{:width => '10%'}
+        %button.btn.btn-primary.pull-right          
+          Add
+          .i.icon-plus
+
 %hr
-
-
-.row
-  .span8
-    %h4 Notes
-    %br
-    .well
-      = @training.notes
-
-  .span4
-    %br
-    %br
-    %table.table.table-bordered
-      %tr
-        %th Feeling
-        %td= @training.feeling
-      %tr
-        %th Temperature
-        %td= @training.temperature
-      %tr
-        %th Weather
-        %td= @training.weather
-      %tr
-        %th Surface
-        %td= @training.surface
+%h3 Exercises for this training:
 
 %table.table.table-striped.exercise-table{:'data-training-id' => @training.id}
   %thead
     %tr
       %th{:width => '30%'} 
-        Exercise name
+        Description
       %th{:width => '30%'} 
         Distance
       %th{:width => '30%'} 
@@ -67,31 +106,25 @@
   %tbody
     - @training.exercises.each do |exercise|
       %tr{:'data-exercise-id' => exercise.id}
-        %td.exercise-name= exercise.name
-        %td.exercise-distance= exercise.distance
-        %td.exercise-time= exercise.formatted_time
-        %td
+        %td.field.exercise-name= exercise.name
+        %td.field.exercise-distance= exercise.distance
+        %td.field.exercise-time= exercise.formatted_time
+        %td.delete-exercise
           - if can? :manage_trainings, @training.user
-            = link_to training_exercise_path(@training, exercise), :method => :delete, :confirm => 'Are you sure?', :class => 'btn btn-mini' do
+            %button.btn.btn-mini
               %i.icon-trash
-
-- if can? :manage_trainings, @training.user
-  %table.table
-    %tr.exercise-form-row
-      = form_for([@training, @training.exercises.build]) do |f|
-        %td{:width => '30%'}
-          = f.text_field :name
-        %td{:width => '30%'}
-          = f.text_field :distance
-        %td{:width => '30%'}
-          = f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
-          = f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
-          = f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
-        %td{:width => '10%'}
-          %button.btn.btn-primary.pull-right          
-            Add
-            .i.icon-plus
-
-            
-
+              
+%script
+  feelingValues = [];
+  - for v in Training::FEELING
+    ="feelingValues.push({label: '#{v.first}', value: '#{v.last}'});"
+  temperatureValues = [];
+  - for v in Training::TEMPERATURE
+    ="temperatureValues.push({label: '#{v.first}', value: '#{v.last}'});"
+  weatherValues = [];
+  - for v in Training::WEATHER
+    ="weatherValues.push({label: '#{v.first}', value: '#{v.last}'});"
+  surfaceValues = [];
+  - for v in Training::SURFACE
+    ="surfaceValues.push({label: '#{v.first}', value: '#{v.last}'});"
   

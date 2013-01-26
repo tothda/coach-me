@@ -29,3 +29,16 @@
         }
     }
 }
+
+.features-table {
+    th {
+        width: 100px;
+    }
+    td {
+        padding: 0;
+        span {
+            padding: 8px;
+            display: block;
+        }
+    }
+}
