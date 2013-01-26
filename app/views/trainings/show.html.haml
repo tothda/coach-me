@@ -20,8 +20,13 @@
 
 %hr
 
-%h2= @training.title
-
+.row
+  .span8
+    %h2= @training.title
+  .span4  
+    %h3.pull-right
+      %i.icon-calendar
+      =l @training.started_at, :format => :day
 %hr
 
 
@@ -33,10 +38,9 @@
       = @training.notes
 
   .span4
+    %br
+    %br
     %table.table.table-bordered
-      %tr
-        %th Date
-        %td= l @training.started_at, :format => :day
       %tr
         %th Feeling
         %td= @training.feeling
@@ -83,10 +87,11 @@
           = f.select(:hours, (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
           = f.select(:minutes, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
           = f.select(:seconds, (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
-        %td{:width => '3%'}
-          = f.button :class => 'btn btn-success' do
-            .i.icon-plus
+        %td{:width => '10%'}
+          %button.btn.btn-primary.pull-right          
             Add
+            .i.icon-plus
+
             
 
   
