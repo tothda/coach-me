@@ -6,11 +6,9 @@
       .nav-collapse
         %ul.nav
           - if user_signed_in?
-            %li=link_to "Trainings", root_path
+            %li=link_to "My trainings", root_path
           - if can? :manage, User
             %li=link_to "Runners", users_path
-          - if user_signed_in?
-            %li=link_to "Add New", new_training_path
           
         %ul.nav.pull-right
           - if user_signed_in?

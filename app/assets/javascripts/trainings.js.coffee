@@ -290,7 +290,7 @@ class TrainingEditor
     $(window).off 'unload.training-editor'
 
   startEditing: ->
-    @saveButton.removeClass('disabled').find('span').html(' Save')
+    @saveButton.removeClass('disabled').find('span').html(' Save training')
     @editButton.after(@saveButton, @cancelButton).remove()
     @cancelButton.click => this.cancel()
     @saveButton.click =>

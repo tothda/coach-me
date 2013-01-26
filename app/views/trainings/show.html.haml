@@ -76,7 +76,7 @@
       %td{:width => '30%'}
         = text_field "exercise", "name", placeholder: 'Exercise description'
       %td{:width => '30%'}
-        = text_field "exercise", "distance", placeholder: 'Distance covered'
+        = text_field "exercise", "distance", placeholder: 'Distance (km)'
       %td{:width => '30%'}
         Time:
         = select("exercise", "hours", (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
