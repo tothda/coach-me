@@ -369,18 +369,14 @@ class ExerciseForm
         false
 
   makeNewRow: (resp, data)->
-    console.log('makeNewRow', data)
     newRow = $("""
-<tr>
+<tr data-exercise-id='#{resp.id}'>
   <td class='field exercise-name'>#{data[@fName]}</td>
   <td class='field exercise-distance'>#{data[@fDistance]}</td>
   <td class='field exercise-time'>#{TimeCell.renderTime(data)}</td>
   <td class='delete-exercise'><button class='btn btn-mini'><i class='icon-trash'></i></button></td>
 </tr>
     """)
-    #newRow.find('.exercise-name').html(resp.name)
-    #newRow.find('.exercise-distance').html(resp.distance)
-    #TimeCell.renderTime(data, newRow.find('.exercise-time'))
     @table.append(newRow)
 
 makeAlert = (text, type, closable = true) ->
