@@ -8,9 +8,9 @@ class Training < ActiveRecord::Base
 
   TEMPERATURE = [["Hot", "hot"],["Warm", "warm"],["Mild", "mild"],["Cold", "cold"],["Freezing", "freezing"]]
 
-  WEATHER = [["Normal", "normal"], ["Rainy", "rainy"],["Cloudy", "cloudy"],["Sunny", "sunny"],["Snowy", "snowy"]]
+  WEATHER = [["Normal", "normal"], ["Rainy", "rainy"],["Cloudy", "cloudy"],["Sunny", "sunny"],["Snowy", "snowy"], ["Windy", "windy"]]
 
-  SURFACE = [["Road", "road"],["Trial", "trial"],["Offroad", "offroad"],["Mixed", "mixed"],["Beach", "beach"]]
+  SURFACE = [["Running track", "track"], ["Road", "road"],["Offroad", "offroad"],["Mixed", "mixed"],["Beach", "beach"], ["Hills", "hills"]]
   
   def total_distance
     exercises.map(&:distance).map(&:to_f).sum
