@@ -63,7 +63,7 @@
               <% end %>              
             </td>
             <td  style="width: 50%">
-              <%= link_to training.title, training_path(training) %>
+              <%= link_to training.title, user_training_path(@athlete,training) %>
               <% if training.needs_summary? %>
                 <i class="icon-comment"></i>
               <% end %>

@@ -1,5 +1,6 @@
 class TrainingsController < ApplicationController
   skip_authorization_check
+  skip_before_filter :authenticate_user!, :only => [:index, :show]
   before_filter :initialize_athlete
   before_filter :authorize_read, :only => [:index, :show]
   before_filter :authorize_manage, :except => [:index, :show]
@@ -103,9 +104,11 @@ class TrainingsController < ApplicationController
   def initialize_athlete
     @athlete = if params[:user_id]
                 User.find(params[:user_id])
-              else
-                current_user
-              end
+               elsif current_user.present?
+                 current_user
+               else
+                 redirect_to new_user_session_url
+               end
   end
 
   def authorize_manage

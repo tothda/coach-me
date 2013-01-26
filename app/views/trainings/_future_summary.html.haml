@@ -21,10 +21,10 @@
               - trainings_on_this_day = week.by_day[day.to_date] || []
               - trainings_on_this_day.each_with_index do |training, idx2|
                 - if training.needs_summary?
-                  = link_to training.title, training_path(training), { :rel=> "popover", :'data-trigger' => "hover", :'data-placement'=> "bottom", :'data-delay'=>"300", :'data-title'=>"Summary", :'data-content'=>"#{render(:partial => 'training_summary', :locals => {:training => training})}"}
+                  = link_to training.title, user_training_path(@athlete, training), { :rel=> "popover", :'data-trigger' => "hover", :'data-placement'=> "bottom", :'data-delay'=>"300", :'data-title'=>"Summary", :'data-content'=>"#{render(:partial => 'training_summary', :locals => {:training => training})}"}
                   %i{:class=>'icon-comment'}
                 - else
-                  = link_to training.title, training_path(training)
+                  = link_to training.title, user_training_path(@athlete, training)
                 - if idx2 < trainings_on_this_day.count - 1
                   %hr
 

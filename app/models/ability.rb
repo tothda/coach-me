@@ -40,6 +40,7 @@ class Ability
     end
 
     can :read_trainings, User do |subject|
+      subject.public ||
       user == subject ||
       user.viewer_of?(subject) ||
       user.trainer_of?(subject)
