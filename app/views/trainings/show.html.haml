@@ -67,30 +67,6 @@
               = @training.description_of(:surface)
 
 %hr
-%h3 Add new exercise
-%br
-
-- if can? :manage_trainings, @training.user
-  %table{:width => '100%'}
-    %tr.exercise-form-row
-      %td{:width => '30%'}
-        = text_field "exercise", "name", placeholder: 'Exercise description'
-      %td{:width => '30%'}
-        = text_field "exercise", "distance", placeholder: 'Distance (km)'
-      %td{:width => '30%'}
-        Time:
-        = select("exercise", "hours", (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
-        h
-        = select("exercise", "minutes", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
-        m
-        = select("exercise", "seconds", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
-        s
-      %td{:width => '10%'}
-        %button.btn.btn-primary.pull-right          
-          Add
-          .i.icon-plus
-
-%hr
 %h3 Exercises for this training:
 
 %table.table.table-striped.exercise-table{:'data-training-id' => @training.id}
@@ -127,4 +103,27 @@
   surfaceValues = [];
   - for v in Training::SURFACE
     ="surfaceValues.push({label: '#{v.first}', value: '#{v.last}'});"
-  
+
+- if can? :manage_trainings, @training.user  
+  %hr
+  %h3 Add new exercise:
+  %br
+
+  %table{:width => '100%'}
+    %tr.exercise-form-row
+      %td{:width => '30%'}
+        = text_field "exercise", "name", placeholder: 'Exercise description'
+      %td{:width => '30%'}
+        = text_field "exercise", "distance", placeholder: 'Distance (km)'
+      %td{:width => '30%'}
+        Time:
+        = select("exercise", "hours", (0..5).map {|p| [ p, p ] }, {}, {:style => 'width: 55px'})
+        h
+        = select("exercise", "minutes", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+        m
+        = select("exercise", "seconds", (0..59).map {|p| [ ("%02d" % p), p ] }, {}, {:style => 'width: 55px'})
+        s
+      %td{:width => '10%'}
+        %button.btn.btn-primary.pull-right          
+          Add
+          .i.icon-plus
