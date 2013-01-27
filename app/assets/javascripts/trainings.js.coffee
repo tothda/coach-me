@@ -323,7 +323,7 @@ class TrainingEditor
       success: =>
         this.stopEditing()
         this.render(data)
-        makeAlert('Changes has been saved.', 'success')
+        makeAlert('Changes have been saved.', 'success')
         false
       error: =>
         makeAlert('Ooops, something bad happened. We could not save your changes.', 'error')
