@@ -6,7 +6,7 @@
   <div class="training-week" style="margin-bottom: 20px;">
     
     <table class="table">
-      {{#each training in weekGroup}}
+      {{#each training in weekGroup.trainings}}
         <tr>
           <td style="width: 20%; padding-left: 20px">
             <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
@@ -16,9 +16,15 @@
           </td>
           <td style="width: 20%">{{view App.StarView rateBinding="training.feelingValue"}}</td>
           <td style="width: 50%">{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>
-          <td style="width: 10%">{{training.totalDistance}} km</td>
+          <td style="width: 10%">{{formatNumber training.totalDistance}} km</td>
         </tr>
       {{/each}}
+      
+      <tr>
+        <th></th>
+        <th></th>
+        <th style="text-align:right">Total</th>
+        <th>{{formatNumber weekGroup.totalDistance}} km</th>
     </table>
   
   </div>

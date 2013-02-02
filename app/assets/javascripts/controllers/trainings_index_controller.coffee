@@ -19,7 +19,7 @@ App.TrainingsIndexController = Em.ArrayController.extend
       groups.get(groupKey).push(x)
       
     groups.forEach (k,v) =>
-      result.push(v)
+      result.push(App.WeekGroup.create({trainings: v}))
     
     result
   .property('completed')

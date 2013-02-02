@@ -16,5 +16,5 @@ App.Training = DS.Model.extend
   .property('feeling')
   
   totalDistance: Em.computed ->
-    @get('exercises').mapProperty('distance').reduce(((acc, item) -> acc + item), 0).toFixed(2)
+    @get('exercises').mapProperty('distance').reduce(((acc, item) -> acc + item), 0)
   .property('exercises.@each.distance')
