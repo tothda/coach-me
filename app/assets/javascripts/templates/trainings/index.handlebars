@@ -14,8 +14,9 @@
             </span>
             {{formatDate training.startedAt format='dddd'}}
           </td>
-          <td>{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>
-          <td>{{training.startedAtDay}}</td>
+          <td style="width: 20%">{{view App.StarView rateBinding="training.feelingValue"}}</td>
+          <td style="width: 50%">{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>
+          <td style="width: 10%">x .km</td>
         </tr>
       {{/each}}  
     </table>
