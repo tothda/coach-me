@@ -10,9 +10,9 @@
         <tr>
           <td style="width: 20%; padding-left: 20px">
             <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
-              {{training.startedAtMonthAndDay}}
+              {{formatDate training.startedAt format='MMM dd'}}
             </span>
-            {{training.startedAtNameOfDay}}
+            {{formatDate training.startedAt format='dddd'}}
           </td>
           <td>{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>
           <td>{{training.startedAtDay}}</td>

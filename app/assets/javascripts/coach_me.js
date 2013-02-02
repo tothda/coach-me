@@ -1,3 +1,5 @@
+//= require ./utils
+//= require ./handlebars_helpers
 //= require ./store
 //= require_tree ./models
 //= require_tree ./controllers

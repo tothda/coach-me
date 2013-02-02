@@ -15,7 +15,7 @@ App.TrainingsIndexController = Em.ArrayController.extend
     groups = Em.MapWithDefault.create(defaultValue: (()-> []))
     
     completed.map (x) =>
-      groupKey = @startOfWeek(x.get('startedAt'))
+      groupKey = App.Utils.startOfWeek(x.get('startedAt')).getTime()
       groups.get(groupKey).push(x)
       
     groups.forEach (k,v) =>
@@ -23,12 +23,3 @@ App.TrainingsIndexController = Em.ArrayController.extend
     
     result
   .property('completed')
-  
-  startOfWeek: (date) ->
-    start = date.clone()
-    monday = if start.is().monday()
-      start
-    else
-      start.previous().monday()
-      
-    start.clearTime().getTime()
