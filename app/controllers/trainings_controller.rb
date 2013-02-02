@@ -13,7 +13,7 @@ class TrainingsController < ApplicationController
     authorize! :read_trainings, @athlete
     @user = @athlete
 
-    @trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
+    @trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id).includes(:exercises)
     @training_groups = group_trainings_for_index_page(@trainings, Date.today)
     
     respond_with @trainings

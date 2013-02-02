@@ -1,3 +1,7 @@
+DS.RESTAdapter.map 'App.Training',
+  exercises:
+    keyName: 'exercise_ids'
+
 App.Store = DS.Store.extend
   revision: 11
   adapter: DS.RESTAdapter.extend()
