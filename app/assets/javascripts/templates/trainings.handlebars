@@ -1,5 +1,10 @@
 <h1>Trainings</h1>
 
-{{#each training in controller}}
-  {{training.title}}<br>
-{{/each}}
+<table class="table table-bordered">
+  {{#each training in controller}}
+    <tr>
+      <td>{{training.title}}</td>
+      <td>{{training.startedAtDay}}</td>
+    </tr>
+  {{/each}}  
+</table>

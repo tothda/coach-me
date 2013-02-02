@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require handlebars
+//= require 'vendor/datejs'
 //= require ember
 //= require ember-data
 //= require_self
