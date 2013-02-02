@@ -19,7 +19,7 @@
 //= require ember-data
 //= require_self
 //= require coach_me
-CoachMe = Ember.Application.create();
+App = Ember.Application.create();
 //= require_tree .
 
 //= require bootstrap-datepicker/core

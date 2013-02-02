@@ -1,0 +1,1 @@
+App.TrainingsIndexController = Em.ArrayController.extend()

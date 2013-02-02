@@ -1,0 +1,9 @@
+<h1>Trainings</h1>
+<table class="table table-bordered">
+  {{#each training in controller}}
+    <tr>
+      <td>{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>
+      <td>{{training.startedAtDay}}</td>
+    </tr>
+  {{/each}}  
+</table>
