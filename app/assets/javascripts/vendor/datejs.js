@@ -1,4 +1,4 @@
-//= require './datejs/hu-HU'
+//= require './datejs/en-US'
 //= require './datejs/core'
 //= require './datejs/parser'
 //= require './datejs/sugarpak'

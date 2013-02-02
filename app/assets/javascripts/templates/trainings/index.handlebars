@@ -5,14 +5,22 @@
 
   <div class="training-week" style="margin-bottom: 20px;">
     
+    <h4 style="padding: 10px">
+      Week {{formatDate weekGroup.week format="#%W"}}
+      <span style="color:gray; font-size: 12px; font-weight:normal">
+        ({{formatDate weekGroup.beginning format="%b %d"}}-{{formatDate weekGroup.end format="%b %d"}})
+
+      </span>
+    </h4>
+    
     <table class="table">
       {{#each training in weekGroup.trainings}}
         <tr>
           <td style="width: 20%; padding-left: 20px">
             <span class="label label-info" style="padding-right: 1px;margin-right: 5px">
-              {{formatDate training.startedAt format='MMM dd'}}
+              {{formatDate training.startedAt format="%b %d"}}
             </span>
-            {{formatDate training.startedAt format='dddd'}}
+            {{formatDate training.startedAt format='%A'}}
           </td>
           <td style="width: 20%">{{view App.StarView rateBinding="training.feelingValue"}}</td>
           <td style="width: 50%">{{#linkTo trainings.show training}}{{training.title}}{{/linkTo}}</td>

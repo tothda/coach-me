@@ -4,7 +4,7 @@ Ember.Handlebars.registerBoundHelper 'formatDate', (value, options) ->
   
   format = options.hash.format
   
-  value.toString(format)
+  value.format(format)
     
 Ember.Handlebars.registerBoundHelper 'formatNumber', (value, options) ->
   value = 0 if Em.isEmpty(value)
