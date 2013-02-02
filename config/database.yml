@@ -15,5 +15,5 @@ test:
 
 production:
   <<: *common
-  database: coachme_production
+  database: coachme_development
 

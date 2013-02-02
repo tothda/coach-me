@@ -1,0 +1,1 @@
+CoachMe.TrainingsController = Em.ArrayController.extend()

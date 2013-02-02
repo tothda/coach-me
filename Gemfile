@@ -49,3 +49,5 @@ gem 'devise'
 gem "cancan"
 gem 'haml'
 gem 'coffee-filter'
+gem 'ember-rails'
+gem "active_model_serializers", :git => "git://github.com/rails-api/active_model_serializers.git"

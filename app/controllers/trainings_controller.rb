@@ -4,6 +4,7 @@ class TrainingsController < ApplicationController
   before_filter :initialize_athlete
   before_filter :authorize_read, :only => [:index, :show]
   before_filter :authorize_manage, :except => [:index, :show]
+  respond_to :html, :json
   
   include TrainingsHelper
   # GET /trainings
@@ -12,13 +13,10 @@ class TrainingsController < ApplicationController
     authorize! :read_trainings, @athlete
     @user = @athlete
 
-    trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
-    @training_groups = group_trainings_for_index_page(trainings, Date.today)
+    @trainings = Training.where("started_at > ? and user_id = ?", Date.today - 1.year, @user.id)
+    @training_groups = group_trainings_for_index_page(@trainings, Date.today)
     
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @trainings }
-    end
+    respond_with @trainings
   end
 
   # GET /trainings/1

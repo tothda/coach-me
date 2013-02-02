@@ -13,10 +13,17 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require handlebars
+//= require ember
+//= require ember-data
+//= require_self
+//= require coach_me
+CoachMe = Ember.Application.create();
 //= require_tree .
 
 //= require bootstrap-datepicker/core
 //= require underscore
+//= require ember
 
 $(window).ready(function(){
   $(document).on("focus", "[data-behaviour~='datepicker']", function(e){

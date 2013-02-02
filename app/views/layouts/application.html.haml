@@ -11,19 +11,4 @@
     %meta{name: 'viewport', content:'width=device-width, initial-scale=1.0'}
 
   %body
-    #wrap
-      = render partial: 'layouts/menubar'
 
-      .container
-        .row
-          .span12= render partial: 'layouts/messages'
-          .span12= yield
-      #push
-
-    #footer
-      .container
-        = render partial: 'layouts/footer'
-
-
-    = render partial: 'layouts/error_modal'
-    = render partial: 'layouts/google_analytics'
