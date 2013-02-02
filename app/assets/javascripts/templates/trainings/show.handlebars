@@ -5,10 +5,83 @@
       Back to trainings
     {{/linkTo}}
   </div>
-</div>
+</div>  
+
+<hr>
+
+<div class="row">
+  <div class="span8">
+    <div class="training-title">
+      <h2>{{title}}</h2>
+    </div>
+  </div>
   
+  <div class="span2">
+    <div class="pull-right">
+      <h3>
+        <i class="icon-calendar"></i>
+        {{formatDate startedAt format="%Y.%m.%d"}}
+      </h3>
+    </div>
+  </div>
+</div>
+            
+<hr>
 
+<div class="row">
+  <div class="span8">
+    <h4>Notes</h4>
+    <br>
+    <div class="training-notes">
+      <div class="well">
+        {{notes}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="span4">
+    <br>
+    <br>
+    
+    <table class="table table-bordered features-table">
+      <tr>
+        <th>Feeling</th>
+        <td><span>{{feeling}}</span></td>
+      </tr>
+      <tr>
+        <th>Temperature</th>
+        <td><span>{{temperature}}</span></td>
+      </tr>
+      <tr>
+        <th>Weather</th>
+        <td><span>{{weather}}</span></td>
+      </tr>
+      <tr>
+        <th>Surface</th>
+        <td><span>{{surface}}</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
 
+<hr>
+<h3>Exercises for this training:</h3>
 
-
-<h1>{{title}}</h1>
+<table class="table table-striped exercise-table">
+  <thead>
+    <th style="width:30%">Description</th>
+    <th style="width:30%">Distance</th>
+    <th style="width:30%">Time</th>
+    <th style="width:3%"></th>
+  </thead>
+  <tbody>
+    {{#each exercise in exercises}}
+      <tr>
+        <td>{{exercise.name}}</td>
+        <td>{{exercise.distance}}</td>
+        <td>{{exercise.formattedTime}}</td>
+        <td></td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

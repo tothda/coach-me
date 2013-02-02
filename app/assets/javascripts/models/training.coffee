@@ -2,6 +2,10 @@ App.Training = DS.Model.extend
   title: DS.attr('string')
   startedAt: DS.attr('date')
   feeling: DS.attr('string')
+  weather: DS.attr('string')
+  surface: DS.attr('string')
+  temperature: DS.attr('string')
+  notes: DS.attr('string')
   exercises: DS.hasMany('App.Exercise')
   
   feelingValue: Em.computed ->
