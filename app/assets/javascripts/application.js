@@ -19,7 +19,15 @@
 //= require ember-data
 //= require_self
 //= require coach_me
-App = Ember.Application.create();
+App = Ember.Application.create({
+  ready: function() {
+    updateClockFn = function() {
+      App.set('time', new Date());
+    }
+    setInterval(updateClockFn , 60000)
+    updateClockFn();
+  }
+});
 //= require_tree .
 
 //= require bootstrap-datepicker/core

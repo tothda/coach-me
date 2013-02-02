@@ -3,13 +3,15 @@
 
 {{#each weekGroup in completedByWeek}}
 
-  <div class="training-week" style="margin-bottom: 20px;">
+  <div style="margin-bottom: 20px;" {{bindAttr class=":training-week weekGroup.current"}}>
     
+    {{#if weekGroup.current }}
+      <h3 style="padding: 10px 0 0 10px; text-decoration: underline">Current week</h3>
+    {{/if}}
     <h4 style="padding: 10px">
       Week {{formatDate weekGroup.week format="#%W"}}
       <span style="color:gray; font-size: 12px; font-weight:normal">
         ({{formatDate weekGroup.beginning format="%b %d"}}-{{formatDate weekGroup.end format="%b %d"}})
-
       </span>
     </h4>
     

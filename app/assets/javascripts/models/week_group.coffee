@@ -8,5 +8,10 @@ App.WeekGroup = Em.Object.extend
   .property('trainings.@each.totalDistance')
   
   end: Em.computed ->
-    @get('beginning').addDays(6).at({hour:23,minute:59,second:59})
+    @get('beginning').clone().addDays(6).at({hour:23,minute:59,second:59})
   .property('beginning')
+  
+  current: Em.computed ->
+    time = App.get('time')
+    time.between(@get('beginning'), @get('end'))
+  .property('App.time')
