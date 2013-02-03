@@ -21026,40 +21026,7 @@ Ember.Select = Ember.View.extend(
 
   tagName: 'select',
   classNames: ['ember-select'],
-  defaultTemplate: Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
-helpers = helpers || Ember.Handlebars.helpers; data = data || {};
-  var buffer = '', stack1, hashTypes, escapeExpression=this.escapeExpression, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = '', stack1, hashTypes;
-  data.buffer.push("<option value=\"\">");
-  stack1 = {};
-  hashTypes = {};
-  stack1 = helpers._triageMustache.call(depth0, "view.prompt", {hash:stack1,contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data});
-  data.buffer.push(escapeExpression(stack1) + "</option>");
-  return buffer;}
-
-function program3(depth0,data) {
-  
-  var stack1, hashTypes;
-  stack1 = {};
-  hashTypes = {};
-  hashTypes['contentBinding'] = "STRING";
-  stack1['contentBinding'] = "this";
-  stack1 = helpers.view.call(depth0, "Ember.SelectOption", {hash:stack1,contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data});
-  data.buffer.push(escapeExpression(stack1));}
-
-  stack1 = {};
-  hashTypes = {};
-  stack1 = helpers['if'].call(depth0, "view.prompt", {hash:stack1,inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  stack1 = {};
-  hashTypes = {};
-  stack1 = helpers.each.call(depth0, "view.content", {hash:stack1,inverse:self.noop,fn:self.program(3, program3, data),contexts:[depth0],types:["ID"],hashTypes:hashTypes,data:data});
-  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
-  return buffer;
-}),
+  defaultTemplate: Ember.Handlebars.compile('{{#if view.prompt}}<option value="">{{view.prompt}}</option>{{/if}}{{#each view.content}}{{view Ember.SelectOption contentBinding="this"}}{{/each}}'),
   attributeBindings: ['multiple', 'disabled', 'tabindex'],
 
   /**

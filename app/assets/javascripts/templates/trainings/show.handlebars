@@ -5,8 +5,8 @@
       Back to trainings
     {{/linkTo}}
   </div>
-  <div class="btn-group pull-left">
-    {{#if editing}}
+  {{#if editing}}
+    <div class="btn-group pull-left">
       <button {{action save}} class="btn btn-success">
         <i class="icon-ok icon-white"></i>
         Save training
@@ -14,17 +14,21 @@
       <button {{action cancel}} class="btn">
         Cancel
       </button>
-    {{else}}
+      <button {{action delete}} class="btn">
+        Delete
+      </button>
+    </div>    
+  {{else}}
+    <div class="btn-group pull-left">  
       <button {{action edit}} class="btn">
         <i class="icon-edit"></i>
         Edit
       </button>
-    {{/if}}
-    
-    <button {{action delete}} class="btn">
-      Delete
-    </button>      
-  </div>
+      <button {{action delete}} class="btn">
+        Delete
+      </button>      
+    </div>
+  {{/if}}  
 </div>  
 
 <hr>
@@ -74,19 +78,55 @@
     <table class="table table-bordered features-table">
       <tr>
         <th>Feeling</th>
-        <td><span>{{feeling}}</span></td>
+        <td>
+          {{#if editing}}
+            {{view Em.Select contentBinding="feelingOptions" 
+                             optionValuePath="content.value"
+                             optionLabelPath="content.label"
+                             valueBinding="feeling"}}
+          {{else}}
+            <span>{{feelingLabel}}</span>
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Temperature</th>
-        <td><span>{{temperature}}</span></td>
+        <td>
+          {{#if editing}}
+            {{view Em.Select contentBinding="temperatureOptions" 
+                             optionValuePath="content.value"
+                             optionLabelPath="content.label"
+                             valueBinding="temperature"}}
+          {{else}}
+            <span>{{temperatureLabel}}</span>
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Weather</th>
-        <td><span>{{weather}}</span></td>
+        <td>
+          {{#if editing}}
+            {{view Em.Select contentBinding="weatherOptions" 
+                             optionValuePath="content.value"
+                             optionLabelPath="content.label"
+                             valueBinding="weather"}}
+          {{else}}
+            <span>{{weatherLabel}}</span>
+          {{/if}}
+        </td>
       </tr>
       <tr>
         <th>Surface</th>
-        <td><span>{{surface}}</span></td>
+        <td>
+          {{#if editing}}
+            {{view Em.Select contentBinding="surfaceOptions" 
+                             optionValuePath="content.value"
+                             optionLabelPath="content.label"
+                             valueBinding="surface"}}
+          {{else}}
+            <span>{{surfaceLabel}}</span>
+          {{/if}}
+        </td>
       </tr>
     </table>
   </div>

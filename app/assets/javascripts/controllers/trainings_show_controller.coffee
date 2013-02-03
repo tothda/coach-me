@@ -1,3 +1,9 @@
+_generateOptionsPropertyFor = (options) ->
+  Em.computed ->
+    for obj in options
+      {value: obj.value, label: obj.label}
+  .property()
+
 App.TrainingsShowController = Em.ObjectController.extend
   editing: false
     
@@ -20,3 +26,8 @@ App.TrainingsShowController = Em.ObjectController.extend
       
     @get('model.startedAt').format('%Y.%m.%d')
   .property('model.startedAt')
+
+  feelingOptions: _generateOptionsPropertyFor(App.Training.FEELING)
+  temperatureOptions: _generateOptionsPropertyFor(App.Training.TEMPERATURE)
+  weatherOptions: _generateOptionsPropertyFor(App.Training.WEATHER)
+  surfaceOptions: _generateOptionsPropertyFor(App.Training.SURFACE)
