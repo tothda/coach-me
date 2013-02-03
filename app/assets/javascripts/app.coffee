@@ -10,6 +10,6 @@ this.App = Ember.Application.create
       
 App.LOG_TRANSITIONS = true
 
-Ember.TextField.reopen({
-  attributeBindings: ["data-behaviour"]
+Ember.TextSupport.reopen({
+  attributeBindings: ["data-behaviour", 'style']
 })
