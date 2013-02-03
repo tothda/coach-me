@@ -8,10 +8,20 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
  *= require bootstrap-datepicker
+ *= require_self
  */
+ 
+ 
+@import "bootstrap";
+@import "responsive";
+
+@iconSpritePath: '/assets/glyphicons-halflings.png';
+@iconWhiteSpritePath: '/assets/glyphicons-halflings-white.png';
+
+body {
+    padding-top: 60px;
+}
 
 .alert p {
     margin: 0;
@@ -27,47 +37,6 @@ textarea {
 	box-sizing: border-box;         /* Opera/IE 8+ */
 }
 
-html,
-body {
-    height: 100%;
-/* The html and body elements cannot have any padding or margin. */
-    padding: 0;
-    margin: 0;
-}
-
-/* Wrapper for page content to push down footer */
-#wrap {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    /* Negative indent footer by it's height */
-    margin: 0 auto -22px;
-    padding-bottom: 40px;
-}
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-    height: 22px;
-}
-#footer {
-    background-color: white;
-    border-top: 1px solid lightgray;
-    color: gray;
-    font-size: 11px;
-    padding-top: 1px;
-}
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-    #footer {
-        margin-left: -20px;
-        margin-right: -20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
 .star-view {
   color: orange;
   
@@ -79,4 +48,18 @@ body {
 .training-week.current {
   background-color: lightyellow; 
   border: 1px dashed gray;
+}
+
+
+// Ember adds an 'active' class to linkTo in some cases with different semantics so we ignore
+// Bootstrap's active buttons.
+.btn {
+  // Active state
+  &.active,
+  &:active {
+    background-image: none;
+    outline: 0;
+    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+   .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
+  }
 }

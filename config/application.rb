@@ -63,5 +63,7 @@ module CoachMe
     
     config.ember.variant = :development
     config.handlebars.precompile = false
+    
+    config.less.paths << "#{Rails.root}/vendor/assets/stylesheets/bootstrap"
   end
 end
