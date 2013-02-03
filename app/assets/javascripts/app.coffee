@@ -9,3 +9,7 @@ this.App = Ember.Application.create
       App.set('currentUser', App.User.find(userId))
       
 App.LOG_TRANSITIONS = true
+
+Ember.TextField.reopen({
+  attributeBindings: ["data-behaviour"]
+})

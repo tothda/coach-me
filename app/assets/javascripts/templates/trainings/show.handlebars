@@ -6,9 +6,20 @@
     {{/linkTo}}
   </div>
   <div class="btn-group pull-left">
-    <button {{action edit}} class="btn">
-      Edit
-    </button>
+    {{#if editing}}
+      <button {{action save}} class="btn btn-success">
+        <i class="icon-ok icon-white"></i>
+        Save training
+      </button>
+      <button {{action cancel}} class="btn">
+        Cancel
+      </button>
+    {{else}}
+      <button {{action edit}} class="btn">
+        <i class="icon-edit"></i>
+        Edit
+      </button>
+    {{/if}}
     
     <button {{action delete}} class="btn">
       Delete
@@ -22,7 +33,7 @@
   <div class="span8">
     <div class="training-title">
       {{#if editing}}
-        {{view Em.TextField valueBinding="title" class="editable h2"}}
+        {{view Em.TextField valueBinding="title" class="editable editable-full h2"}}
       {{else}}
         <h2>{{title}}</h2>
       {{/if}}
@@ -31,10 +42,14 @@
   
   <div class="span2">
     <div class="pull-right">
-      <h3>
+      <h4>
         <i class="icon-calendar"></i>
-        {{formatDate startedAt format="%Y.%m.%d"}}
-      </h3>
+        {{#if editing}}
+          {{view Em.TextField valueBinding="startedAtFmt" class="editable h4 datepicker input-medium" data-behaviour="datepicker"}}
+        {{else}}
+          {{startedAtFmt}}
+        {{/if}}
+      </h4>
     </div>
   </div>
 </div>
