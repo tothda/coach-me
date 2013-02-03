@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :expect => :home
   check_authorization :unless => :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|

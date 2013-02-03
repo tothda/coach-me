@@ -1,0 +1,28 @@
+<fieldset>
+  <div id="legend">
+    <legend class="">Sign in</legend>
+  </div>
+    
+  <div class="control-group">
+    <label for="email" class='control-label'>Email</label>
+    <div class="controls">
+      {{view Em.TextField valueBinding="email"}}
+    </div>
+  </div>
+ 
+  <div class="control-group">
+    <label for="password" class='control-label'>Password</label>
+    <div class="controls">
+      {{view Em.TextField valueBinding="password" type="password"}}
+    </div>
+  </div>
+ 
+ 
+  <div class="control-group">
+    <div class="controls">
+      <button {{action login}} class="btn btn-primary">Sign in</button>
+      <br/><br />
+    </div>
+      
+  </div>
+</fieldset>

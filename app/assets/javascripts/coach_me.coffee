@@ -1,3 +1,4 @@
+#= require ./app
 #= require ./utils
 #= require ./js_utils
 #= require ./handlebars_helpers
@@ -10,3 +11,6 @@
 #= require ./router
 #= require_tree ./routes
 #= require_self
+
+    
+    

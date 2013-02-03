@@ -10,8 +10,12 @@
         </ul>
         
         <ul class="nav pull-right">
-          <li><a href="#">tothda@gmail.com</a></li>
-          <li><a href="#">Logout</a></li>
+          {{#if App.currentUser}}
+            <li><a href="#">{{App.currentUser.email}}</a></li>
+            <li><a {{action logout}} href="#">Logout</a></li>
+          {{else}}
+          
+          {{/if}}
         </ul>
       </div>
     </div>

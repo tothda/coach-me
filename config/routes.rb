@@ -1,6 +1,6 @@
 CoachMe::Application.routes.draw do
 
-  devise_for :users, :controllers => {:registrations => "registrations"}
+  devise_for :users, :controllers => {:registrations => "registrations", :sessions => 'sessions'}
   
   resources :users do
     resources :trainings do
@@ -14,6 +14,6 @@ CoachMe::Application.routes.draw do
 
   resources :relationships
   
-  root :to => 'trainings#index'
+  root :to => 'home#index'
 end
 

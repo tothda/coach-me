@@ -62,5 +62,6 @@ module CoachMe
     config.assets.initialize_on_precompile = false
     
     config.ember.variant = :development
+    config.handlebars.precompile = false
   end
 end
