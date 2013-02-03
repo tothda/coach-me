@@ -5,6 +5,15 @@
       Back to trainings
     {{/linkTo}}
   </div>
+  <div class="btn-group pull-left">
+    <button {{action edit}} class="btn">
+      Edit
+    </button>
+    
+    <button {{action delete}} class="btn">
+      Delete
+    </button>      
+  </div>
 </div>  
 
 <hr>
@@ -12,7 +21,11 @@
 <div class="row">
   <div class="span8">
     <div class="training-title">
-      <h2>{{title}}</h2>
+      {{#if editing}}
+        {{view Em.TextField valueBinding="title" class="editable h2"}}
+      {{else}}
+        <h2>{{title}}</h2>
+      {{/if}}
     </div>
   </div>
   
