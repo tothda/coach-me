@@ -11,6 +11,8 @@ CoachMe::Application.routes.draw do
   resources :trainings do
     resources :exercises
   end
+  
+  resources :exercises
 
   resources :relationships
   

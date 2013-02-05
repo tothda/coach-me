@@ -151,11 +151,41 @@
   <tbody>
     {{#each exercise in exercises}}
       <tr>
-        <td>{{exercise.name}}</td>
-        <td>{{exercise.distance}}</td>
-        <td>{{exercise.formattedTime}}</td>
-        <td></td>
+        <td>
+          {{#if editing}}
+            {{view Em.TextField valueBinding="exercise.name"}}
+          {{else}}
+            {{exercise.name}}
+          {{/if}}
+        </td>
+        <td>
+          {{#if editing}}
+            {{view Em.TextField valueBinding="exercise.distance"}}
+          {{else}}
+            {{exercise.distance}} km
+          {{/if}}
+        </td>
+        <td>
+          {{#if editing}}
+            {{view Em.TextField valueBinding="exercise.timeForEdit"}}
+          {{else}}
+            {{exercise.formattedTime}}
+          {{/if}}
+        </td>
+        <td>
+          {{#if editing}}
+            <button {{action deleteExercise exercise}} class="btn btn-mini">
+              <i class="icon-trash"></i>
+            </button>
+          {{/if}}
+        </td>
       </tr>
     {{/each}}
   </tbody>
 </table>
+
+{{#if editing}}
+  <button {{action addExercise}}class="btn btn-primary">
+    Add more exercise
+  </button>
+{{/if}}

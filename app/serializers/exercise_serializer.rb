@@ -1,3 +1,5 @@
 class ExerciseSerializer < ActiveModel::Serializer
-  attributes :id, :name, :distance, :time
+  embed :ids
+  attributes :id, :name, :distance, :time, :position
+  has_one :training
 end

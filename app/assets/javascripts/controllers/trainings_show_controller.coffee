@@ -6,19 +6,36 @@ _generateOptionsPropertyFor = (options) ->
 
 App.TrainingsShowController = Em.ObjectController.extend
   editing: false
+  newExercises: null
+  
+  reset: ->
+    @set('newExercises', Em.Set.create())
+    @set('editing', false)
     
   edit: ->
     @set('editing', true)
     transaction = @get('store').transaction()
     transaction.add(@get('model'))
+    @get('model.exercises').forEach (x) ->
+      transaction.add(x)
     
   cancel: ->
     @set('editing', false)
+    exercises = @get('model.exercises')
+    @get('newExercises').forEach (x) ->
+      exercises.removeObject(x)
     @get('model.transaction').rollback()
     
   save: ->
     @set('editing', false)
     @get('model.transaction').commit()
+    
+  addExercise: ->
+    exercise = @get('model.exercises').createRecord({time:0})
+    @get('newExercises').addObject(exercise)
+    
+  deleteExercise: (exercise)->
+    exercise.deleteRecord()
     
   startedAtFmt: Em.computed (key, value) ->
     if value

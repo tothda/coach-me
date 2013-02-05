@@ -1,6 +1,6 @@
 class Exercise < ActiveRecord::Base
   belongs_to :training
-  attr_accessible :distance, :name, :position, :hours, :minutes, :seconds
+  attr_accessible :distance, :name, :position, :hours, :minutes, :seconds, :time
   
   attr_accessor :hours, :minutes, :seconds
   before_save :update_time

@@ -15,17 +15,14 @@ App.Training = DS.Model.extend
   notes: DS.attr('string')
   exercises: DS.hasMany('App.Exercise')
   
+  liveExercises: Em.computed ->
+    @get('exercises').filterProperty('isDeleted', false)
+  .property('exercises.@each.isDeleted')
+  
   feelingValue: Em.computed ->
     value = @get('feeling')
-    return 0 if Em.isEmpty(value)
-    switch value
-      when "injured" then 1
-      when "sluggish" then 2
-      when "soso" then 3
-      when "good" then 4
-      when "awesome" then 5
-      
-    App.Training.FEELINGS.findProperty('value', value).star
+    option = App.Training.FEELING.findProperty('value', value)
+    if option then option.star else 0
   .property('feeling')
   
   feelingLabel: _generateLabelProperty('feeling')
