@@ -34,9 +34,6 @@ App.TrainingsShowController = Em.ObjectController.extend
     exercise = @get('model.exercises').createRecord({time:0})
     @get('newExercises').addObject(exercise)
     
-  deleteExercise: (exercise)->
-    exercise.deleteRecord()
-    
   startedAtFmt: Em.computed (key, value) ->
     if value
       @get('model').set('startedAt', Date.parse(value))
